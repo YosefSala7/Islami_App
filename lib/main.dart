@@ -1,5 +1,5 @@
 import 'package:app/core/app_theme.dart';
-import 'package:app/features/Home/screens/home.dart';
+import 'package:app/features/home/screens/home.dart';
 import 'package:app/features/layout/layout.dart';
 import 'package:app/features/onboarding/screens/onboarding_screen.dart';
 import 'package:app/features/splash/splashScreen.dart';

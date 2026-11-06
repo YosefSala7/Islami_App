@@ -1,6 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
-import 'package:app/features/Home/screens/home.dart';
+import 'package:app/features/home/screens/home.dart';
 import 'package:app/features/layout/layout.dart';
 import 'package:app/features/onboarding/models/onboarding_model.dart';
 import 'package:flutter/material.dart';
