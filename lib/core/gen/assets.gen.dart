@@ -29,6 +29,9 @@ class $AssetsImgsGen {
   /// Directory path: assets/imgs/onboarding
   $AssetsImgsOnboardingGen get onboarding => const $AssetsImgsOnboardingGen();
 
+  /// Directory path: assets/imgs/tasbih
+  $AssetsImgsTasbihGen get tasbih => const $AssetsImgsTasbihGen();
+
   /// List of all assets
   List<AssetGenImage> get values => [mosque02, icSplash];
 }
@@ -102,6 +105,25 @@ class $AssetsImgsOnboardingGen {
     group31,
     onboarding2,
   ];
+}
+
+class $AssetsImgsTasbihGen {
+  const $AssetsImgsTasbihGen();
+
+  /// File path: assets/imgs/tasbih/Group 37.png
+  AssetGenImage get group37 =>
+      const AssetGenImage('assets/imgs/tasbih/Group 37.png');
+
+  /// File path: assets/imgs/tasbih/SebhaBody 1.png
+  AssetGenImage get sebhaBody1 =>
+      const AssetGenImage('assets/imgs/tasbih/SebhaBody 1.png');
+
+  /// File path: assets/imgs/tasbih/sebha_bg.png
+  AssetGenImage get sebhaBg =>
+      const AssetGenImage('assets/imgs/tasbih/sebha_bg.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [group37, sebhaBody1, sebhaBg];
 }
 
 abstract final class Assets {
