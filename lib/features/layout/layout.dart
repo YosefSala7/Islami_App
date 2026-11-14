@@ -1,5 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/tasbih/screens/tasbih.dart';
 import 'package:flutter/material.dart';
 
 class Layout extends StatefulWidget {
@@ -12,9 +13,18 @@ class Layout extends StatefulWidget {
 
 class _LayoutState extends State<Layout> {
   int currentIndex = 0;
+  List<Widget> screens = [
+    Text("Quran"),
+    Text("Hadith"),
+    Tasbih(),
+    Text("Radio"),
+    Text("Times"),
+
+  ];  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: screens[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         type: .fixed,
         showUnselectedLabels: false,
