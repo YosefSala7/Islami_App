@@ -22,6 +22,11 @@ abstract class AppTheme {
         color: AppColors.primary,
         fontWeight: .w700,
       ),
+      displaySmall: TextStyle(
+        fontFamily: "JannaLT",
+        color: AppColors.white,
+        fontWeight: .w700,
+      ),
     ),
   );
 }
