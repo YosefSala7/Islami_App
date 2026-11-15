@@ -1,5 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/quran/screens/quran_screen.dart';
 import 'package:app/features/tasbih/screens/tasbih.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class Layout extends StatefulWidget {
 class _LayoutState extends State<Layout> {
   int currentIndex = 0;
   List<Widget> screens = [
-    Text("Quran"),
+    Quran(),
     Text("Hadith"),
     Tasbih(),
     Text("Radio"),

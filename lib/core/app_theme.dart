@@ -27,6 +27,11 @@ abstract class AppTheme {
         color: AppColors.white,
         fontWeight: .w700,
       ),
+      labelLarge:TextStyle(
+        fontFamily: "JannaLT",
+        color: AppColors.black,
+        fontWeight: .bold,
+      ),
     ),
   );
 }

@@ -1,5 +1,5 @@
 import 'package:app/core/app_theme.dart';
-import 'package:app/features/home/screens/home.dart';
+import 'package:app/features/quran/screens/quran_screen.dart';
 import 'package:app/features/layout/layout.dart';
 import 'package:app/features/onboarding/screens/onboarding_screen.dart';
 import 'package:app/features/splash/splashScreen.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         SplashScreen.splashRoute: (context) => SplashScreen(),
         OnboardingScreen.onboardingRoute: (context) => OnboardingScreen(),
-        Home.homeRoute: (context) => Home(),
+        Quran.homeRoute: (context) => Quran(),
         Layout.layoutRoute: (context) => Layout(),
       },
     );
