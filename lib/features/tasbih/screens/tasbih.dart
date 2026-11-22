@@ -51,8 +51,8 @@ class _TasbihState extends State<Tasbih> {
                           counter++;
                         });
                       },
-
                       child: Stack(
+                        alignment: .center,
                         children: [
                           AnimatedRotation(
                             turns: (1 / 30) * counter,
@@ -60,26 +60,22 @@ class _TasbihState extends State<Tasbih> {
                             curve: Curves.easeInOut,
                             child: Assets.imgs.tasbih.sebhaBody1.image(),
                           ),
-                          Positioned(
-                            bottom: 120,
-                            left: 90,
-                            child: Column(
-                              spacing: 20,
-                              children: [
-                                Text(
-                                  "سبحان الله",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall,
-                                ),
-                                Text(
-                                  counter.toString(),
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displaySmall,
-                                ),
-                              ],
-                            ),
+                          Column(
+                            spacing: 20,
+                            children: [
+                              Text(
+                                "سبحان الله",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall,
+                              ),
+                              Text(
+                                counter.toString(),
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displaySmall,
+                              ),
+                            ],
                           ),
                         ],
                       ),

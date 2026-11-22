@@ -1,11 +1,42 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/components/background.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/quran/components/surah_row.dart';
+import 'package:app/features/quran/models/surah_model.dart';
+import 'package:app/features/quran/screens/quran_details_screen.dart';
 import 'package:flutter/material.dart';
 
-class Quran extends StatelessWidget {
+class Quran extends StatefulWidget {
   const new({super.key});
   static const homeRoute = "/quran";
+  @override
+  State<Quran> createState() => _QuranState();
+}
+
+class _QuranState extends State<Quran> {
+  List<SurahModel> _filteredList = [];
+  @override
+  void initState() {
+    super.initState();
+    _filteredList = surahsList;
+  }
+
+  void _onSearch(String? value) {
+    setState(() {
+      if (value != null) {
+        value.trim();
+        if (value.isEmpty) {
+          _filteredList = surahsList;
+        } else {
+          _filteredList = surahsList.where((surah) {
+            return surah.nameAR.toLowerCase().contains(value.toLowerCase()) ||
+                surah.nameEN.toLowerCase().contains(value.toLowerCase());
+          }).toList();
+        }
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,14 +52,18 @@ class Quran extends StatelessWidget {
               spacing: 20,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 50.0),
+                  padding: EdgeInsets.symmetric(horizontal: 50.0),
                   child: Assets.imgs.onboarding.group31.image(),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: TextField(
+                    onChanged: (value) {
+                      _onSearch(value);
+                    },
+                    style: Theme.of(context).textTheme.titleMedium!
+                        .copyWith(color: AppColors.white, fontWeight: .bold),
                     cursorColor: AppColors.primary,
-            
                     decoration: InputDecoration(
                       hintText: "Sura Name",
                       hintStyle: Theme.of(context).textTheme.titleMedium!
@@ -40,7 +75,6 @@ class Quran extends StatelessWidget {
                           height: 25,
                         ),
                       ),
-            
                       filled: true,
                       fillColor: AppColors.black.withValues(alpha: 0.7),
                       border: OutlineInputBorder(
@@ -156,59 +190,21 @@ class Quran extends StatelessWidget {
                       shrinkWrap: true,
                       padding: EdgeInsets.symmetric(horizontal: 20),
                       itemBuilder: (context, index) {
-                        return Row(
-                          spacing: 24,
-                          children: [
-                            Stack(
-                              children: [
-                                Assets.imgs.quran.vector.svg(),
-                                Positioned(
-                                  left: 20,
-                                  top: 14,
-                                  child: Text(
-                                    (index + 1).toString(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .titleLarge!
-                                        .copyWith(color: AppColors.white),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Column(
-                              crossAxisAlignment: .start,
-                              spacing: 5,
-                              children: [
-                                Text(
-                                  "Al-Fatiha",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .titleLarge!
-                                      .copyWith(color: AppColors.white),
-                                ),
-                                Text(
-                                  "7 Verses",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .labelLarge!
-                                      .copyWith(color: AppColors.white),
-                                ),
-                              ],
-                            ),
-                          
-                            Spacer(),
-                            Text(
-                              "الفاتحة",
-                              style: Theme.of(context).textTheme.titleLarge!
-                                  .copyWith(color: AppColors.white),
-                            ),
-                          ],
+                        return SurahRow(
+                          surah: _filteredList[index],
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              QuranDetailsScreen.quranDetialsRoute,
+                              arguments: _filteredList[index]
+                            );
+                          },
                         );
                       },
                       separatorBuilder: (context, index) {
-                        return Divider(height: 20,indent: 40,endIndent: 40,);
+                        return Divider(height: 20, indent: 40, endIndent: 40);
                       },
-                      itemCount: 114,
+                      itemCount: _filteredList.length,
                     ),
                   ],
                 ),

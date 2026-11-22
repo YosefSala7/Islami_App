@@ -25,6 +25,10 @@ class $AssetsImgsGen {
   AssetGenImage get icSplash =>
       const AssetGenImage('assets/imgs/ic_splash.png');
 
+  /// File path: assets/imgs/left_corner.png
+  AssetGenImage get leftCorner =>
+      const AssetGenImage('assets/imgs/left_corner.png');
+
   /// Directory path: assets/imgs/navbar_icons
   $AssetsImgsNavbarIconsGen get navbarIcons =>
       const $AssetsImgsNavbarIconsGen();
@@ -35,11 +39,20 @@ class $AssetsImgsGen {
   /// Directory path: assets/imgs/quran
   $AssetsImgsQuranGen get quran => const $AssetsImgsQuranGen();
 
+  /// File path: assets/imgs/right_corner.png
+  AssetGenImage get rightCorner =>
+      const AssetGenImage('assets/imgs/right_corner.png');
+
   /// Directory path: assets/imgs/tasbih
   $AssetsImgsTasbihGen get tasbih => const $AssetsImgsTasbihGen();
 
   /// List of all assets
-  List<AssetGenImage> get values => [mosque02, icSplash];
+  List<AssetGenImage> get values => [
+    mosque02,
+    icSplash,
+    leftCorner,
+    rightCorner,
+  ];
 }
 
 class $AssetsImgsNavbarIconsGen {
