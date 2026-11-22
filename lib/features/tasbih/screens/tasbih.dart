@@ -2,7 +2,6 @@ import 'package:app/core/app_colors.dart';
 import 'package:app/core/components/background.dart';
 import 'package:app/core/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 class Tasbih extends StatefulWidget {
   const new({super.key});

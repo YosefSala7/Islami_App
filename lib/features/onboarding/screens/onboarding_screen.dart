@@ -1,3 +1,4 @@
+import 'package:app/core/Utils/shared_prefs_storage.dart';
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
 import 'package:app/features/quran/screens/quran_screen.dart';
@@ -14,13 +15,17 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  @override
   int currentIndex = 0;
   late PageController _controller;
   @override
   void initState() {
     super.initState();
     _controller = PageController(initialPage: currentIndex);
+  }
+
+  Future<void> _navigate() async {
+    Navigator.pushReplacementNamed(context, Layout.layoutRoute);
+    await SharedPrefsStorage.saveBool("isFirst", false);
   }
 
   Widget build(BuildContext context) {
@@ -103,10 +108,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   Bounceable(
                     onTap: () {
                       currentIndex == onboardingScreens.length - 1
-                          ? Navigator.pushReplacementNamed(
-                              context,
-                              Layout.layoutRoute,
-                            )
+                          ? _navigate()
                           : _controller.nextPage(
                               duration: Duration(milliseconds: 200),
                               curve: Curves.easeInOut,
