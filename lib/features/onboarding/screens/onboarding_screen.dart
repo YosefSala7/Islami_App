@@ -1,6 +1,7 @@
 import 'package:app/core/Utils/shared_prefs_storage.dart';
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/quran/screens/quran_screen.dart';
 import 'package:app/features/layout/layout.dart';
 import 'package:app/features/onboarding/models/onboarding_model.dart';
 import 'package:flutter/material.dart';
