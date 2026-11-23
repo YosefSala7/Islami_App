@@ -75,7 +75,6 @@ class _QuranDetailsScreenState extends State<QuranDetailsScreen> {
   Future<void> loadData(String num) async {
     String content = await rootBundle.loadString("assets/Suras/${num}.txt");
     verses = content.split("\n");
-    print(verses.toString());
     setState(() {});
   }
 }
