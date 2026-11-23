@@ -1,5 +1,6 @@
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/hadith/screens/hadith.dart';
 import 'package:app/features/quran/screens/quran_screen.dart';
 import 'package:app/features/tasbih/screens/tasbih.dart';
 import 'package:flutter/material.dart';
@@ -16,12 +17,11 @@ class _LayoutState extends State<Layout> {
   int currentIndex = 0;
   List<Widget> screens = [
     Quran(),
-    Text("Hadith"),
+    HadithView(),
     Tasbih(),
     Text("Radio"),
     Text("Times"),
-
-  ];  
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(

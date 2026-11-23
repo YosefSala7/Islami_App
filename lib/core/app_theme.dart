@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 abstract class AppTheme {
   static ThemeData darkTheme = ThemeData(
     scaffoldBackgroundColor: AppColors.black,
-    textTheme: TextTheme(//size:24
+    textTheme: TextTheme(
       headlineSmall: TextStyle(
+        //size:24
         fontFamily: "JannaLT",
         color: AppColors.primary,
         fontWeight: .w700,
       ),
-      titleLarge: TextStyle(//size:20
+      titleLarge: TextStyle(
+        //size:20
         fontFamily: "JannaLT",
         color: AppColors.primary,
         fontWeight: .w700,
@@ -26,10 +28,16 @@ abstract class AppTheme {
         color: AppColors.white,
         fontWeight: .w700,
       ),
-      labelLarge:TextStyle(
+      labelLarge: TextStyle(
         fontFamily: "JannaLT",
         color: AppColors.black,
         fontWeight: .bold,
+      ),
+      bodyLarge: TextStyle(
+        fontFamily: "JannaLT",
+        color: AppColors.black,
+        fontWeight: .bold,
+        
       ),
     ),
   );
