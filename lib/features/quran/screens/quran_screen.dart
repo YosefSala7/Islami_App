@@ -1,6 +1,8 @@
+import 'package:app/core/Utils/shared_prefs_storage.dart';
 import 'package:app/core/app_colors.dart';
 import 'package:app/core/components/background.dart';
 import 'package:app/core/gen/assets.gen.dart';
+import 'package:app/features/quran/components/most_recently_card.dart';
 import 'package:app/features/quran/components/surah_row.dart';
 import 'package:app/features/quran/models/surah_model.dart';
 import 'package:app/features/quran/screens/quran_details_screen.dart';
@@ -15,10 +17,32 @@ class Quran extends StatefulWidget {
 
 class _QuranState extends State<Quran> {
   List<SurahModel> _filteredList = [];
+  List<SurahModel> mostRecently = [];
+
+  void _addSurahToList(SurahModel surah) {
+    SharedPrefsStorage.addSurah(surah.id);
+    loadRecently();
+    setState(() {});
+  }
+
+  void loadRecently() async {
+    final recentlyList = await SharedPrefsStorage.getMostRecentSurahList();
+    List<SurahModel> newlist = recentlyList.map((id) {
+      return surahsList.firstWhere((surah) {
+        return surah.id == id;
+      });
+    }).toList();
+
+    setState(() {
+      mostRecently = newlist;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
     _filteredList = surahsList;
+    loadRecently();
   }
 
   void _onSearch(String? value) {
@@ -101,79 +125,54 @@ class _QuranState extends State<Quran> {
                     ),
                   ),
                 ),
+
                 Column(
                   crossAxisAlignment: .start,
                   spacing: 10,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                      child: Text(
-                        "Most Recently",
-                        style: Theme.of(context).textTheme.titleMedium!
-                            .copyWith(
-                              color: AppColors.white,
-                              fontWeight: .bold,
+                    if (mostRecently.isNotEmpty)
+                      Column(
+                        crossAxisAlignment: .start,
+                        spacing: 10,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 20.0,
                             ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 150,
-                      child: ListView.separated(
-                        padding: EdgeInsets.symmetric(horizontal: 20),
-                        scrollDirection: .horizontal,
-                        itemBuilder: (context, index) {
-                          return Container(
-                            decoration: BoxDecoration(
-                              color: AppColors.primary,
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                            child: Row(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 15.0,
-                                    top: 15,
-                                    bottom: 15,
+                            child: Text(
+                              "Most Recently",
+                              style: Theme.of(context).textTheme.titleMedium!
+                                  .copyWith(
+                                    color: AppColors.white,
+                                    fontWeight: .bold,
                                   ),
-                                  child: Column(
-                                    crossAxisAlignment: .start,
-                                    mainAxisAlignment: .center,
-                                    spacing: 15,
-                                    children: [
-                                      Text(
-                                        "Al-Anbiya",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall!
-                                            .copyWith(color: AppColors.black),
-                                      ),
-                                      Text(
-                                        "الأنبياء",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall!
-                                            .copyWith(color: AppColors.black),
-                                      ),
-                                      Text(
-                                        "112 Verses",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                Assets.imgs.quran.quranSura.image(),
-                              ],
                             ),
-                          );
-                        },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(width: 10);
-                        },
-                        itemCount: 4,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.heightOf(context) * 0.19,
+                            child: ListView.separated(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              scrollDirection: .horizontal,
+                              itemBuilder: (context, index) {
+                                return MostRecentlyCard(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                      context,
+                                      QuranDetailsScreen.quranDetialsRoute,
+                                      arguments: mostRecently[index],
+                                    );
+                                  },
+                                  surah: mostRecently[index],
+                                );
+                              },
+                              separatorBuilder: (context, index) {
+                                return SizedBox(width: 10);
+                              },
+                              itemCount: mostRecently.length,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: Text(
@@ -193,10 +192,11 @@ class _QuranState extends State<Quran> {
                         return SurahRow(
                           surah: _filteredList[index],
                           onTap: () {
+                            _addSurahToList(_filteredList[index]);
                             Navigator.pushNamed(
                               context,
                               QuranDetailsScreen.quranDetialsRoute,
-                              arguments: _filteredList[index]
+                              arguments: _filteredList[index],
                             );
                           },
                         );
